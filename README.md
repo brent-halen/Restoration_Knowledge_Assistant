@@ -128,6 +128,36 @@ Suggested prompts:
 - `What would a moderate mold remediation job usually cost?`
 - `What should I document for insurance after water damage?`
 
+## Docker
+
+The project includes a Docker image definition and a `compose.yaml` file for local containerized runs.
+
+Build the image:
+
+```powershell
+docker build -t restoration-knowledge-assistant .
+```
+
+Run it directly:
+
+```powershell
+docker run --rm -p 8501:8501 --env-file .env -e CHROMA_PERSIST_DIR=/app/chroma_db restoration-knowledge-assistant
+```
+
+Or use Docker Compose:
+
+```powershell
+docker compose up --build
+```
+
+The compose setup mounts a named volume for `chroma_db` so the local Chroma collection can persist across restarts.
+
+Container notes:
+
+- the app still works without `OPENAI_API_KEY`, but it will run in offline preview mode
+- live mode requires valid OpenAI credentials and available quota
+- Streamlit is exposed on port `8501`
+
 ## Testing
 
 ```powershell

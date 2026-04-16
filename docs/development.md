@@ -22,6 +22,28 @@ python -m src.smoke_test --mode offline
 python -m compileall src tests
 ```
 
+## Docker commands
+
+Build:
+
+```powershell
+docker build -t restoration-knowledge-assistant .
+```
+
+Run:
+
+```powershell
+docker run --rm -p 8501:8501 --env-file .env -e CHROMA_PERSIST_DIR=/app/chroma_db restoration-knowledge-assistant
+```
+
+Compose:
+
+```powershell
+docker compose up --build
+```
+
+The compose file uses a named volume for `chroma_db` so embeddings do not need to be rebuilt on every restart.
+
 ## Demo prompts
 
 - `My basement has standing water from a burst pipe that started 20 minutes ago. What should I do first?`
