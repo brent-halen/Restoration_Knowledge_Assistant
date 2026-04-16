@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Riley Chen",
+    "certifications": ["WRT", "ASD"],
+    "specialties": ["water_damage", "general"],
+    "on_call": true,
+    "eta_minutes": 45
+  },
+  {
+    "name": "Morgan Alvarez",
+    "certifications": ["AMRT", "FSRT"],
+    "specialties": ["mold", "fire_damage"],
+    "on_call": true,
+    "eta_minutes": 75
+  },
+  {
+    "name": "Jordan Patel",
+    "certifications": ["FSRT"],
+    "specialties": ["fire_damage", "general"],
+    "on_call": false,
+    "eta_minutes": 0
+  },
+  {
+    "name": "Samira Brooks",
+    "certifications": ["WRT", "AMRT"],
+    "specialties": ["water_damage", "mold"],
+    "on_call": true,
+    "eta_minutes": 60
+  }
+]

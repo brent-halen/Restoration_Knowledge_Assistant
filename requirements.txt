@@ -1,0 +1,15 @@
+chromadb
+langchain
+langchain-chroma
+langchain-community
+langchain-openai
+langgraph
+pydantic
+pydantic-settings
+pypdf
+python-dotenv
+ruff
+streamlit
+tenacity
+pytest
+
