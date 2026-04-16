@@ -42,7 +42,7 @@ def init_session_state():
 
 def render_sidebar():
     st.sidebar.title("Demo Status")
-    st.sidebar.caption("Portfolio starter, not production software.")
+    st.sidebar.caption("Portfolio project, not production software.")
     st.sidebar.write("Knowledge base: seeded local markdown files")
     st.sidebar.write("Pricing: deterministic demo ranges")
     st.sidebar.write("Technicians: mock availability data")

@@ -8,7 +8,8 @@ Single-agent restoration workflow assistant built with LangGraph, Streamlit, Chr
 - `.venv\Scripts\Activate.ps1`
 - `python -m pip install -r requirements.txt`
 - `streamlit run src/app.py`
-- `python src/eval.py`
+- `python -m src.eval --mode offline`
+- `python -m src.smoke_test --mode offline`
 - `python -m pytest -q`
 - `python -m compileall src tests`
 
@@ -27,4 +28,3 @@ Single-agent restoration workflow assistant built with LangGraph, Streamlit, Chr
 - Treat safety-sensitive remediation guidance conservatively.
 - Do not present mock pricing or mock technician data as production truth.
 - Prefer deterministic logic for estimates and routing whenever possible.
-

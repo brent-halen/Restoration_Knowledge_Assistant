@@ -17,6 +17,8 @@ Add `OPENAI_API_KEY` to `.env` to enable live agent mode.
 ```powershell
 .venv\Scripts\Activate.ps1
 python -m pytest -q
+python -m src.eval --mode offline
+python -m src.smoke_test --mode offline
 python -m compileall src tests
 ```
 
@@ -36,4 +38,3 @@ python -m compileall src tests
 ## Current scope
 
 This project is intentionally narrow. It focuses on triage, retrieval, pricing guidance, and dispatch-style lookup rather than trying to simulate a full restoration operating system.
-

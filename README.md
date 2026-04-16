@@ -1,5 +1,7 @@
 # Restoration Knowledge Assistant
 
+[![CI](https://github.com/brent-halen/Restoration_Knowledge_Assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/brent-halen/Restoration_Knowledge_Assistant/actions/workflows/ci.yml)
+
 Portfolio project for a single-agent AI assistant designed for restoration workflows. The app helps triage fire, water, and mold incidents, retrieve relevant operational guidance, provide deterministic ballpark estimates, and surface mock technician availability through a conversational interface.
 
 ## Overview
@@ -85,6 +87,7 @@ src/
   knowledge_base.py   Chroma ingestion and retrieval setup
   models.py           Pydantic response schemas
   offline_demo.py     Offline preview logic
+  smoke_test.py       One-command smoke-test entrypoint
   tools.py            Agent tools
 
 data/
@@ -93,6 +96,7 @@ data/
 
 tests/
   test_domain_logic.py
+  test_eval.py
   test_offline_demo.py
 ```
 
@@ -129,9 +133,55 @@ Suggested prompts:
 ```powershell
 .venv\Scripts\Activate.ps1
 python -m pytest -q
+python -m src.eval --mode offline
+python -m src.smoke_test --mode offline
 ```
 
 Current test coverage is intentionally focused on deterministic logic and offline behavior so the repo can be verified locally without depending on live API calls.
+
+GitHub Actions is configured to run `pytest` on Python `3.12` and `3.13` for every push and pull request.
+
+## Validation
+
+### Current local validation
+
+- `pytest`: `8 passed`
+- offline evaluation harness: `95.8%` average scenario score across 6 scenarios
+- offline smoke test: successful triage plus mock dispatch response
+
+Offline evaluation summary:
+
+| # | Damage | Urgency | Tools | Score |
+|---|--------|---------|-------|-------|
+| 1 | PASS | PASS | PASS | 100.0% |
+| 2 | PASS | FAIL | PASS | 75.0% |
+| 3 | PASS | PASS | PASS | 100.0% |
+| 4 | PASS | PASS | PASS | 100.0% |
+| 5 | PASS | PASS | PASS | 100.0% |
+| 6 | PASS | PASS | PASS | 100.0% |
+
+Known miss:
+
+- the offline heuristic currently over-escalates one mold scenario from `P3_standard` to `P2_urgent`
+
+### Offline smoke test example
+
+```text
+User:
+My basement has standing water from a burst pipe that started 20 minutes ago.
+What should I do first, and do you have any technicians available?
+
+Assistant:
+Offline demo mode classified this as water_damage with urgency P1_emergency.
+
+Why: Active water intrusion or contamination suggests immediate mitigation is needed.
+
+Mock dispatch matches:
+- Riley Chen: ETA 45 min, certs WRT, ASD
+- Samira Brooks: ETA 60 min, certs WRT, AMRT
+```
+
+Live mode is implemented and wired, but it still depends on working OpenAI credentials, available quota, and outbound connectivity at runtime.
 
 ## Design Decisions
 
